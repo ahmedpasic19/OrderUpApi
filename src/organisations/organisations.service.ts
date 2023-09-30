@@ -102,6 +102,13 @@ export class OrganisationsService {
       return { message: `Organisation with ID ${id} was not found.` };
     }
 
+    // remove all org products
+    await prisma.product.deleteMany({
+      where: {
+        organisation_id: id,
+      },
+    });
+
     const deletedOrg = await prisma.organisation.delete({
       where: {
         id,

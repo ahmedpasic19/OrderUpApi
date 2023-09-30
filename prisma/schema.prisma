@@ -19,11 +19,21 @@ model User {
 }
 
 model Organisation {
-  id      Int    @id() @default(autoincrement())
+  id      Int       @id() @default(autoincrement())
   name    String
   phone   String
   address String
   city    String
-  user    User   @relation(fields: [user_id], references: [id])
+  user    User      @relation(fields: [user_id], references: [id])
   user_id Int
+  Product Product[]
+}
+
+model Product {
+  id              Int          @id() @default(autoincrement())
+  name            String
+  price           Float
+  weight          Float
+  organisaton     Organisation @relation(fields: [organisation_id], references: [id])
+  organisation_id Int
 }
